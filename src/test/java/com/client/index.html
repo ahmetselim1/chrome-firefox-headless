@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Awesome Website Title</title>
+    <link type="text/css" rel="stylesheet" href="/css/client.css"/>
+    <link type="image/x-icon" rel="icon" href="favicon.ico">
+</head>
+<body>
+<h1><em id="greeting"></em></h1>
+<h2>This is a <span class="glow">template</span> you can use to <span class="glow">build your website!</span></h2>
+<h3>Isn't that <strong>awesome</strong>?!</h3>
+
+<h4>Recur navigator Logs================================================</h4>
+<div id="navigatorLogs">
+    <script>
+  function recur(obj) {
+      var result = {}, _tmp;
+      for (var i in obj) {
+            // enabledPlugin is too nested, also skip functions
+            if (i === 'enabledPlugin' || typeof obj[i] === 'function') {
+                continue;
+            } else if (typeof obj[i] === 'object') {
+                // get props recursively
+                _tmp = recur(obj[i]);
+                // if object is not {}
+                if (Object.keys(_tmp).length) {
+                    result[i] = _tmp;
+                }
+            } else {
+                // string, number or boolean
+                result[i] = obj[i];
+            }
+      }
+      return result;
+  }
+      document.write(JSON.stringify(recur(navigator)));
+
+    </script>
+
+</div>
+<h4>getOwnPropertyNames Logs===========================================================</h4>
+<div id="getOwnPropertyNames">
+    <script>
+      document.write(Object.getOwnPropertyNames(window));
+
+    </script>
+
+</div>
+
+<h4>Object.keys Global Logs===============================================================</h4>
+<div id="Objectkeys">
+    <script>
+      document.write(Object.keys(window));
+    </script>
+
+</div>
+<h4>Object.keys Global Logs recur===============================================================</h4>
+<div id="ObjectkeysRecurred">
+    <script>
+       function recur(obj) {
+      var result = {}, _tmp;
+      for (var i in obj) {
+            // enabledPlugin is too nested, also skip functions
+            if (i === 'enabledPlugin' || typeof obj[i] === 'function') {
+                continue;
+            } else if (typeof obj[i] === 'object') {
+                // get props recursively
+                _tmp = recur(obj[i]);
+                // if object is not {}
+                if (Object.keys(_tmp).length) {
+                    result[i] = _tmp;
+                }
+            } else {
+                // string, number or boolean
+                result[i] = obj[i];
+            }
+      }
+      return result;
+  }
+<!--      document.write(JSON.stringify(recur(Object.keys(window))));-->
+      document.write(JSON.stringify(recur(window)));
+
+
+    </script>
+
+</div>
+</body>
+</html>
